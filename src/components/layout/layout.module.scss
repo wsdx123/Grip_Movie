@@ -10,9 +10,26 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
+  position: relative;
+  padding: 20px;
 
-  .title {
-    font-size: 30px;
+  header {
+    margin-bottom: 20px;
+    width: 100%;
+
+    .title {
+      font-size: 30px;
+      text-align: center;
+    }
+  }
+
+  main {
+    height: 90%;
+  }
+
+  footer {
+    margin-bottom: 40px;
+    width: 100%;
+    display: flex;
   }
 }

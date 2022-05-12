@@ -1,17 +1,19 @@
 import { NavLink } from 'react-router-dom'
+import { cx } from 'styles'
+
 import styles from './navBar.module.scss'
 
 const NavBar = () => {
   return (
-    <nav>
+    <nav className={styles.container}>
       <ul className={styles.navbar}>
         <li>
-          <NavLink className={styles.navItem} to='/'>
+          <NavLink className={({ isActive }) => cx({ [styles.clicked]: isActive })} to='/'>
             Search
           </NavLink>
         </li>
         <li>
-          <NavLink className={styles.navItem} to='favorite'>
+          <NavLink className={({ isActive }) => cx({ [styles.clicked]: isActive })} to='favorite'>
             Favorite
           </NavLink>
         </li>

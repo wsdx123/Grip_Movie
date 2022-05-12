@@ -1,0 +1,11 @@
+.search {
+  margin-bottom: 10px;
+  form {
+    display: flex;
+    width: 100%;
+    .inputbox {
+      background-color: white;
+      font-size: 24px;
+    }
+  }
+}

@@ -1,4 +1,13 @@
 .container {
-  position: relative;
-  width: calc(100% - 20px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .search {
+  }
+
+  .movielist {
+    overflow: hidden;
+    height: 100%;
+  }
 }

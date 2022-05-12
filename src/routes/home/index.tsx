@@ -1,25 +1,13 @@
-import { useMount } from 'react-use'
-import { getMovieWhatISearchApi } from 'services/gripMovie'
 import { useRecoil } from 'hooks/state'
+
 import { movieDataState } from 'states/movie'
 import SearchBar from 'components/searchBar'
 import MovieItem from 'components/movieItem'
 import styles from './home.module.scss'
 
-const API_KEY = process.env.REACT_APP_MOVIE_API_KEY
-
 const Home = () => {
-  const [mData, setMData] = useRecoil(movieDataState)
+  const [mData] = useRecoil(movieDataState)
 
-  useMount(() => {
-    getMovieWhatISearchApi({
-      apikey: API_KEY,
-      s: 'iron',
-      page: 1,
-    }).then((res) => {
-      setMData(res.data)
-    })
-  })
   if (!mData) return null
 
   return (
@@ -29,8 +17,8 @@ const Home = () => {
       </div>
       <div>
         {mData.Response === 'True' ? (
-          <ul>
-            {mData.Search.map((_el, i): JSX.Element => {
+          <ul className={styles.movielist}>
+            {mData.Search.map((_el, i) => {
               const mItemKey = `movieData__${i}`
               return <MovieItem key={mItemKey} index={i} />
             })}

@@ -1,22 +1,37 @@
 .container {
   display: flex;
   margin-bottom: 5px;
-  padding: 5px;
+  padding: 5px 10px;
   background-color: white;
   border-radius: 10px;
+  justify-content: space-between;
+  align-items: center;
 
-  img {
-    width: 50px;
-    margin-right: 20px;
+  .item {
+    display: flex;
+    img {
+      width: 50px;
+      margin-right: 10px;
+    }
+
+    .infor {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      h1 {
+        font-size: 20px;
+        font-weight: 600;
+      }
+    }
   }
 
-  .infor {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    h1 {
-      font-size: 20px;
-      font-weight: 600;
+  button {
+    visibility: hidden;
+  }
+
+  &:hover {
+    button {
+      visibility: visible;
     }
   }
 }

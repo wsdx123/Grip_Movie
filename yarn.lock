@@ -8448,6 +8448,11 @@ store@^2.0.12:
   resolved "https://registry.yarnpkg.com/store/-/store-2.0.12.tgz#8c534e2a0b831f72b75fc5f1119857c44ef5d593"
   integrity sha1-jFNOKguDH3K3X8XxEZhXxE711ZM=
 
+storejs@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/storejs/-/storejs-2.0.1.tgz#3424f4c88ff979e3962413ce60ea43fd660a9657"
+  integrity sha512-hN/Rb7noRSxwTMdO1ksotketRqAy8fyzwXIXe0wPurV1YzlUVdgL0wC9eSOPpzCLiCPSoHICeX4paFrzigeGeg==
+
 string-length@^4.0.1:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/string-length/-/string-length-4.0.2.tgz#a8a8dc7bd5c1a82b9b3c8b87e125f66871b6e57a"

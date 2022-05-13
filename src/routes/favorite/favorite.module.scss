@@ -1,0 +1,10 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .movielist {
+    overflow: hidden;
+    height: 100%;
+  }
+}

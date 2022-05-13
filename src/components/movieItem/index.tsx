@@ -1,24 +1,29 @@
 import { MouseEvent } from 'react'
 import { useRecoil } from 'hooks/state'
 
-import { modalState, modalXState, modalYState, movieDataState } from 'states/movie'
+import { modalState, modalXState, modalYState } from 'states/movie'
 import { InfoIcon } from 'assets/svgs'
 import styles from './movieItem.module.scss'
 
 interface Props {
-  index: number
+  poster: string
+  title: string
+  year: string
+  type: string
+  imdbID: string
 }
 
-const MovieItem = ({ index }: Props) => {
-  const [mData] = useRecoil(movieDataState)
-  const [, setModalOpen] = useRecoil(modalState)
+const MovieItem = (props: Props) => {
+  const [, setFavModal] = useRecoil(modalState)
   const [, setModalY] = useRecoil(modalYState)
   const [, setModalX] = useRecoil(modalXState)
-
-  const { Search: msd } = mData
+  const { poster, title, year, type, imdbID }: Props = props
 
   const handleModal = (e: MouseEvent<HTMLButtonElement>) => {
-    setModalOpen(true)
+    setFavModal({
+      visible: true,
+      data: props,
+    })
     setModalY(e.clientY)
     setModalX(e.clientX)
   }
@@ -26,13 +31,13 @@ const MovieItem = ({ index }: Props) => {
   return (
     <li className={styles.container}>
       <div className={styles.item}>
-        <img src={msd[index].Poster} alt={msd[index].Title} />
+        <img src={poster} alt={title} />
         <div className={styles.infor}>
           <div>
-            <h1>{msd[index].Title}</h1>
-            <span>{msd[index].Year}</span>
+            <h1>{title}</h1>
+            <span>{year}</span>
           </div>
-          <span>{`Type : ${msd[index].Type}`}</span>
+          <span>{`Type : ${type}`}</span>
         </div>
       </div>
       <button type='button' onClick={handleModal}>

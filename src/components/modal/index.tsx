@@ -1,5 +1,5 @@
 import { useRecoil } from 'hooks/state'
-
+import store from 'store'
 import { favoriteDataState, modalState, modalXState, modalYState } from 'states/movie'
 import styles from './favModal.module.scss'
 
@@ -18,6 +18,8 @@ const FavModal = () => {
 
   const handleFav = () => {
     setFavData([...favData, favModal.data])
+    store.set('favorite', [...favData, favModal.data])
+    console.log(store.get('favorite'))
     closeModal()
   }
 

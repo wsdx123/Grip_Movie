@@ -1,4 +1,5 @@
 import { useRecoil } from 'hooks/state'
+import { useInView } from 'react-intersection-observer'
 
 import { movieDataState } from 'states/movie'
 import SearchBar from 'components/searchBar'
@@ -6,9 +7,13 @@ import MovieItem from 'components/movieItem'
 import FavModal from 'components/modal'
 
 import styles from './home.module.scss'
+import { useEffect, useState } from 'react'
+import { getMovieWhatISearchApi } from 'services/gripMovie'
 
 const Home = () => {
   const [mData] = useRecoil(movieDataState)
+  const [pages, setPages] = useState(1)
+  const [ref, inView] = useInView()
 
   if (!mData) return null
 
@@ -32,6 +37,7 @@ const Home = () => {
                 />
               )
             })}
+            <li ref={ref}>{inView.toString()}</li>
           </ul>
         ) : (
           <div>검색결과가 없습니다.</div>

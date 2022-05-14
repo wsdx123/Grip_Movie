@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react'
+import { LegacyRef, MouseEvent } from 'react'
 import { useRecoil } from 'hooks/state'
 
 import { modalState, modalXState, modalYState } from 'states/movie'

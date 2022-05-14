@@ -1,24 +1,24 @@
 import store from 'store'
-import { useRecoil } from 'hooks/state'
-import { favoriteDataState } from 'states/movie'
-import MovieItem from 'components/movieItem'
 
+import MovieItem from 'components/movieItem'
 import styles from './favorite.module.scss'
+import { favoriteDataState } from 'states/movie'
+import { useRecoil } from 'hooks/state'
 import { useMount } from 'react-use'
 
 const Favorite = () => {
-  const [favData] = useRecoil(favoriteDataState)
+  const [ifavData, setIFavData] = useRecoil(favoriteDataState)
 
   useMount(() => {
-    store.set('favorite', favData)
+    setIFavData(store.get('favorite'))
   })
 
   return (
     <div className={styles.container}>
       <div>
-        {favData.length !== 0 ? (
+        {ifavData.length !== 0 ? (
           <ul className={styles.movielist}>
-            {favData.map((el) => {
+            {ifavData.map((el) => {
               return (
                 <MovieItem
                   key={el.imdbID}

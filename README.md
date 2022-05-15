@@ -12,6 +12,7 @@
 
 ## 동작 화면 
 <img src="https://user-images.githubusercontent.com/50202150/168461178-69a8a05c-e280-427a-b249-22398950eeb5.gif" />
+<img src="https://user-images.githubusercontent.com/50202150/168461217-28f34768-54f5-44b7-9a15-fd547546a2f6.gif" />
 
 ## 사용 라이브러리
 - Recoil : 상태 관리

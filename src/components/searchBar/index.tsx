@@ -1,25 +1,27 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { useRecoil } from 'hooks/state'
 
-import { movieDataState } from 'states/movie'
+import { apiInputState, movieDataState, pageState } from 'states/movie'
 import { getMovieWhatISearchApi } from 'services/gripMovie'
 import { SearchIcon } from 'assets/svgs'
 import styles from './searchBar.module.scss'
 
 const SearchBar = () => {
   const [inputChange, setInputChange] = useState('')
+  const [, setApiInput] = useRecoil(apiInputState)
   const [, setMData] = useRecoil(movieDataState)
+  const [pages] = useRecoil(pageState)
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setApiInput(inputChange)
     getMovieWhatISearchApi({
       apikey: process.env.REACT_APP_MOVIE_API_KEY,
       s: inputChange,
-      page: 1,
-    }).then((res) => {
-      setMData(res.data)
-    })
+      page: pages,
+    }).then((res) => setMData(res.data))
   }
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputChange(e.currentTarget.value)
   }

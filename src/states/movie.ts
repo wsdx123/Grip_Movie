@@ -36,3 +36,13 @@ export const modalXState = atom<number>({
   key: '#modalXState',
   default: 0,
 })
+
+export const apiInputState = atom<string>({
+  key: '#apiInputState',
+  default: '',
+})
+
+export const pageState = atom<number>({
+  key: '#pageState',
+  default: 1,
+})

@@ -1,9 +1,11 @@
+@use '/src/styles/constants/colors';
+
 .container {
   width: 100%;
 
   .navbar {
     display: flex;
-    background-color: blue;
+    background-color: colors.$BLUE;
     width: 100%;
     justify-content: center;
     border-radius: 5px;
@@ -13,7 +15,7 @@
       text-align: center;
       padding: 10px 0;
       a {
-        color: black;
+        color: colors.$BLACK;
       }
     }
   }

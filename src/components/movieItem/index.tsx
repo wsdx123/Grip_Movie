@@ -27,6 +27,8 @@ const MovieItem = (props: Props) => {
     setModalY(e.clientY)
     setModalX(e.clientX)
   }
+  // eslint-disable-next-line no-console
+  console.log(imdbID)
 
   return (
     <li className={styles.container}>

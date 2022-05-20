@@ -39,6 +39,7 @@ const Home = () => {
         return nextPage
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView, setPages])
 
   if (!mData) return null

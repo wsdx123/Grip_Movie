@@ -19,7 +19,6 @@ const Home = () => {
 
   const getNextPageData = (nextPage: number) => {
     getMovieWhatISearchApi({
-      apikey: process.env.REACT_APP_MOVIE_API_KEY,
       s: apiInput,
       page: nextPage,
     }).then((res) =>

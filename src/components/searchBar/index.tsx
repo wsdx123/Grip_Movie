@@ -16,7 +16,6 @@ const SearchBar = () => {
     e.preventDefault()
     setApiInput(inputChange)
     getMovieWhatISearchApi({
-      apikey: process.env.REACT_APP_MOVIE_API_KEY,
       s: inputChange,
       page: pages,
     }).then((res) => setMData(res.data))

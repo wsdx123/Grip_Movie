@@ -9,6 +9,7 @@ import FavModal from 'components/modal'
 import styles from './home.module.scss'
 import { useEffect } from 'react'
 import { getMovieWhatISearchApi } from 'services/gripMovie'
+import Loading from './Loading'
 
 const Home = () => {
   const [mData, setMData] = useRecoil(movieDataState)
@@ -62,7 +63,9 @@ const Home = () => {
                 />
               )
             })}
-            <div ref={ref}>loading...</div>
+            <div ref={ref}>
+              <Loading />
+            </div>
           </ul>
         ) : (
           <div>검색결과가 없습니다.</div>

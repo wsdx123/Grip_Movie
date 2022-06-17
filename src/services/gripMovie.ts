@@ -1,7 +1,7 @@
 import { axios } from 'hooks/worker'
 import { IMovieAPIRes } from 'types/home'
 
-const MOVIE_BASE_URL = `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_MOVIE_API_KEY}`
+const MOVIE_BASE_URL = `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_MOVIE_KEY}`
 
 interface Params {
   s: string

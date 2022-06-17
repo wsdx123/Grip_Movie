@@ -6,9 +6,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy": "gh-pages -d build",
-    "predeploy": "npm run build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -38,11 +36,9 @@
     "axios": "^0.27.2",
     "classnames": "^2.3.1",
     "dayjs": "^1.11.2",
-    "gh-pages": "^4.0.0",
     "i18n-iso-countries": "^7.4.0",
     "i18next": "^21.8.0",
     "i18next-browser-languagedetector": "^6.1.4",
-    "lodash": "^4.17.21",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-i18next": "^11.16.9",
@@ -85,6 +81,5 @@
     "stylelint-config-standard-scss": "^3.0.0",
     "stylelint-declaration-strict-value": "^1.8.0",
     "typescript": "^4.4.2"
-  },
-  "homepage": "https://wsdx123.github.io/Grip_Movie"
+  }
 }

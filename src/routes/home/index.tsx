@@ -9,6 +9,7 @@ import FavModal from 'components/modal'
 import styles from './home.module.scss'
 import { useEffect } from 'react'
 import { getMovieWhatISearchApi } from 'services/gripMovie'
+import Loading from './Loading'
 
 const Home = () => {
   const [mData, setMData] = useRecoil(movieDataState)
@@ -18,7 +19,6 @@ const Home = () => {
 
   const getNextPageData = (nextPage: number) => {
     getMovieWhatISearchApi({
-      apikey: process.env.REACT_APP_MOVIE_API_KEY,
       s: apiInput,
       page: nextPage,
     }).then((res) =>
@@ -38,6 +38,7 @@ const Home = () => {
         return nextPage
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView, setPages])
 
   if (!mData) return null
@@ -62,7 +63,9 @@ const Home = () => {
                 />
               )
             })}
-            <div ref={ref}>loading...</div>
+            <div ref={ref}>
+              <Loading />
+            </div>
           </ul>
         ) : (
           <div>검색결과가 없습니다.</div>

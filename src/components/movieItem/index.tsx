@@ -1,9 +1,10 @@
-import { MouseEvent } from 'react'
+import { MouseEvent, useState } from 'react'
 import { useRecoil } from 'hooks/state'
 
 import { modalState, modalXState, modalYState } from 'states/movie'
-import { InfoIcon } from 'assets/svgs'
+import { HeartIcon, InfoIcon } from 'assets/svgs'
 import styles from './movieItem.module.scss'
+import { cx } from 'styles'
 
 interface Props {
   poster: string
@@ -17,6 +18,7 @@ const MovieItem = (props: Props) => {
   const [, setFavModal] = useRecoil(modalState)
   const [, setModalY] = useRecoil(modalYState)
   const [, setModalX] = useRecoil(modalXState)
+  const [selectedFavorite] = useState(false)
   const { poster, title, year, type, imdbID }: Props = props
 
   const handleModal = (e: MouseEvent<HTMLButtonElement>) => {
@@ -27,6 +29,8 @@ const MovieItem = (props: Props) => {
     setModalY(e.clientY)
     setModalX(e.clientX)
   }
+  // eslint-disable-next-line no-console
+  console.log(imdbID)
 
   return (
     <li className={styles.container}>
@@ -43,6 +47,7 @@ const MovieItem = (props: Props) => {
       <button type='button' onClick={handleModal}>
         <InfoIcon />
       </button>
+      <HeartIcon className={cx(styles.heartIcon, { [styles.selectFavorite]: selectedFavorite })} />
     </li>
   )
 }

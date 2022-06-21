@@ -10,6 +10,7 @@ import styles from './home.module.scss'
 import { useEffect } from 'react'
 import { getMovieWhatISearchApi } from 'services/gripMovie'
 import Loading from './Loading'
+import NoSearch from './NoSearch'
 
 const Home = () => {
   const [mData, setMData] = useRecoil(movieDataState)
@@ -43,13 +44,16 @@ const Home = () => {
 
   if (!mData) return null
 
+  console.log(mData)
+
   return (
     <div className={styles.container}>
       <div className={styles.search}>
         <SearchBar />
       </div>
       <div>
-        {mData.Response === 'True' ? (
+        <NoSearch isView={mData.Response} />
+        {mData.Response === 'True' && (
           <ul className={styles.movielist}>
             {mData.Search.map((el) => {
               return (
@@ -67,8 +71,6 @@ const Home = () => {
               <Loading />
             </div>
           </ul>
-        ) : (
-          <div>검색결과가 없습니다.</div>
         )}
         <FavModal />
       </div>

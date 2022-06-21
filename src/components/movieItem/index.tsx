@@ -30,7 +30,7 @@ const MovieItem = (props: Props) => {
     setModalX(e.clientX)
   }
   // eslint-disable-next-line no-console
-  console.log(imdbID)
+  // console.log(imdbID)
 
   return (
     <li className={styles.container}>

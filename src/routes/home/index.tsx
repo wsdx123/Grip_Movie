@@ -2,55 +2,73 @@ import { useRecoil } from 'hooks/state'
 import { useInView } from 'react-intersection-observer'
 
 import { apiInputState, movieDataState, pageState } from 'states/movie'
-import SearchBar from 'components/searchBar'
 import MovieItem from 'components/movieItem'
 import FavModal from 'components/modal'
 
 import styles from './home.module.scss'
-import { useEffect } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { getMovieWhatISearchApi } from 'services/gripMovie'
 import Loading from './Loading'
 import NoSearch from './NoSearch'
+import { SearchIcon } from 'assets/svgs'
 
 const Home = () => {
+  const [inputChange, setInputChange] = useState('')
   const [mData, setMData] = useRecoil(movieDataState)
-  const [apiInput] = useRecoil(apiInputState)
-  const [, setPages] = useRecoil(pageState)
-  const [ref, inView] = useInView()
+  const [apiInput, setApiInput] = useRecoil(apiInputState)
+  const [pages, setPages] = useRecoil(pageState)
+  // const [ref, inView] = useInView()
 
-  const getNextPageData = (nextPage: number) => {
-    getMovieWhatISearchApi({
-      s: apiInput,
-      page: nextPage,
-    }).then((res) =>
-      setMData((prev) => ({
-        Search: prev.Search.concat(res.data.Search),
-        totalResults: res.data.totalResults,
-        Response: res.data.Response,
-      }))
-    )
+  // const getNextPageData = (nextPage: number) => {
+  //   getMovieWhatISearchApi({
+  //     s: apiInput,
+  //     page: nextPage,
+  //   }).then((res) =>
+  //     setMData((prev) => ({
+  //       Search: prev.Search.concat(res.data.Search),
+  //       totalResults: res.data.totalResults,
+  //       Response: res.data.Response,
+  //     }))
+  //   )
+  // }
+  // useEffect(() => {
+  //   if (inView) {
+  //     setPages((prev) => {
+  //       const nextPage = prev + 1
+  //       getNextPageData(nextPage)
+  //       return nextPage
+  //     })
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [inView, setPages])
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (inputChange === '') return
+    setApiInput(inputChange)
   }
 
   useEffect(() => {
-    if (inView) {
-      setPages((prev) => {
-        const nextPage = prev + 1
-        getNextPageData(nextPage)
-        return nextPage
-      })
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inView, setPages])
+    getMovieWhatISearchApi({
+      s: apiInput,
+      page: pages,
+    }).then((res) => setMData(res.data))
+  }, [apiInput, pages, setMData])
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputChange(e.currentTarget.value)
+  }
 
   if (!mData) return null
 
-  console.log(mData)
-
   return (
     <div className={styles.container}>
-      <div className={styles.search}>
-        <SearchBar />
-      </div>
+      <form className={styles.search} onSubmit={handleSubmit}>
+        <input value={inputChange} onChange={handleChange} className={styles.inputbox} type='text' />
+        <button type='submit' className={styles.submitBtn}>
+          <SearchIcon />
+        </button>
+      </form>
       <div>
         <NoSearch isView={mData.Response} />
         {mData.Response === 'True' && (
@@ -67,9 +85,9 @@ const Home = () => {
                 />
               )
             })}
-            <div ref={ref}>
+            {/* <div ref={ref}>
               <Loading />
-            </div>
+            </div> */}
           </ul>
         )}
         <FavModal />

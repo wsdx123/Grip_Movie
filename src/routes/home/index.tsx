@@ -1,17 +1,17 @@
-import { useRecoil } from 'hooks/state'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
+import { useRecoil } from 'hooks/state'
 import * as _ from 'lodash'
 
 import { apiInputState, movieDataState, pageState } from 'states/movie'
+import { getMovieWhatISearchApi } from 'services/gripMovie'
+import { SearchIcon } from 'assets/svgs'
+
 import MovieItem from 'components/movieItem'
 import FavModal from 'components/modal'
-
-import styles from './home.module.scss'
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
-import { getMovieWhatISearchApi } from 'services/gripMovie'
-import Loading from './Loading'
 import NoSearch from './NoSearch'
-import { SearchIcon } from 'assets/svgs'
+import Loading from './Loading'
+import styles from './home.module.scss'
 
 const Home = () => {
   const [inputChange, setInputChange] = useState('')
@@ -20,21 +20,8 @@ const Home = () => {
   const [pages, setPages] = useRecoil(pageState)
   const [ref, inView] = useInView()
 
-  // const getNextPageData = (nextPage: number) => {
-  //   getMovieWhatISearchApi({
-  //     s: apiInput,
-  //     page: nextPage,
-  //   }).then((res) =>
-  //     setMData((prev) => ({
-  //       Search: prev.Search.concat(res.data.Search),
-  //       totalResults: res.data.totalResults,
-  //       Response: res.data.Response,
-  //     }))
-  //   )
-  // }
   useEffect(() => {
     if (inView) {
-      console.log(333)
       setPages((prev) => prev + 1)
     }
   }, [inView, setPages])
@@ -49,37 +36,19 @@ const Home = () => {
       getMovieWhatISearchApi({
         s: apiInput,
         page: pages,
-      }).then((res) => console.log(_.uniqBy(res.Search, 'imdbID')))
+      }).then((res) => setMData((prev) => _.uniqBy(prev.concat(res.Search), 'imdbID')))
     }
-
-    // else {
-    //   console.log(222)
-    //   getMovieWhatISearchApi({
-    //     s: apiInput,
-    //     page: pages,
-    //   }).then((res) =>
-    //     setMData((prev) => ({
-    //       Search: prev.Search.concat(res.data.Search),
-    //       totalResults: res.data.totalResults,
-    //       Response: res.data.Response,
-    //     }))
-    //   )
-    // }
   }, [apiInput, pages, setMData])
-  // console.log(mData)
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // if (inputChange === '') return
     setApiInput(inputChange)
+    setPages(1)
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputChange(e.currentTarget.value)
   }
-  // console.log(inView)
-
-  // if (!mData) return null
 
   return (
     <div className={styles.container}>

@@ -1,9 +1,9 @@
 interface Props {
-  isView: 'True' | 'False'
+  isView: number
 }
 
 const NoSearch = ({ isView }: Props) => {
-  return <div>{isView === 'False' && <div>검색어 없음</div>}</div>
+  return <div>{isView === 0 && <div>검색어 없음</div>}</div>
 }
 
 export default NoSearch

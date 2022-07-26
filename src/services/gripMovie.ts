@@ -9,7 +9,9 @@ interface Params {
 }
 
 export const getMovieWhatISearchApi = (params: Params) => {
-  return axios.get<IMovieAPIRes>(`${MOVIE_BASE_URL}`, {
-    params,
-  })
+  return axios
+    .get<IMovieAPIRes>(`${MOVIE_BASE_URL}`, {
+      params,
+    })
+    .then((res) => res.data)
 }

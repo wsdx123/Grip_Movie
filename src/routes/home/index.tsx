@@ -1,5 +1,6 @@
 import { useRecoil } from 'hooks/state'
 import { useInView } from 'react-intersection-observer'
+import * as _ from 'lodash'
 
 import { apiInputState, movieDataState, pageState } from 'states/movie'
 import MovieItem from 'components/movieItem'
@@ -17,7 +18,7 @@ const Home = () => {
   const [mData, setMData] = useRecoil(movieDataState)
   const [apiInput, setApiInput] = useRecoil(apiInputState)
   const [pages, setPages] = useRecoil(pageState)
-  // const [ref, inView] = useInView()
+  const [ref, inView] = useInView()
 
   // const getNextPageData = (nextPage: number) => {
   //   getMovieWhatISearchApi({
@@ -31,35 +32,54 @@ const Home = () => {
   //     }))
   //   )
   // }
-  // useEffect(() => {
-  //   if (inView) {
-  //     setPages((prev) => {
-  //       const nextPage = prev + 1
-  //       getNextPageData(nextPage)
-  //       return nextPage
-  //     })
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [inView, setPages])
+  useEffect(() => {
+    if (inView) {
+      console.log(333)
+      setPages((prev) => prev + 1)
+    }
+  }, [inView, setPages])
+
+  useEffect(() => {
+    if (pages === 1) {
+      getMovieWhatISearchApi({
+        s: apiInput,
+        page: 1,
+      }).then((res) => setMData(_.uniqBy(res.Search, 'imdbID')))
+    } else {
+      getMovieWhatISearchApi({
+        s: apiInput,
+        page: pages,
+      }).then((res) => console.log(_.uniqBy(res.Search, 'imdbID')))
+    }
+
+    // else {
+    //   console.log(222)
+    //   getMovieWhatISearchApi({
+    //     s: apiInput,
+    //     page: pages,
+    //   }).then((res) =>
+    //     setMData((prev) => ({
+    //       Search: prev.Search.concat(res.data.Search),
+    //       totalResults: res.data.totalResults,
+    //       Response: res.data.Response,
+    //     }))
+    //   )
+    // }
+  }, [apiInput, pages, setMData])
+  // console.log(mData)
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (inputChange === '') return
+    // if (inputChange === '') return
     setApiInput(inputChange)
   }
-
-  useEffect(() => {
-    getMovieWhatISearchApi({
-      s: apiInput,
-      page: pages,
-    }).then((res) => setMData(res.data))
-  }, [apiInput, pages, setMData])
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputChange(e.currentTarget.value)
   }
+  // console.log(inView)
 
-  if (!mData) return null
+  // if (!mData) return null
 
   return (
     <div className={styles.container}>
@@ -70,10 +90,10 @@ const Home = () => {
         </button>
       </form>
       <div>
-        <NoSearch isView={mData.Response} />
-        {mData.Response === 'True' && (
+        <NoSearch isView={mData.length} />
+        {mData.length !== 0 && (
           <ul className={styles.movielist}>
-            {mData.Search.map((el) => {
+            {mData.map((el) => {
               return (
                 <MovieItem
                   key={el.imdbID}
@@ -85,9 +105,9 @@ const Home = () => {
                 />
               )
             })}
-            {/* <div ref={ref}>
+            <div ref={ref}>
               <Loading />
-            </div> */}
+            </div>
           </ul>
         )}
         <FavModal />

@@ -1,11 +1,11 @@
 import { atom } from 'hooks/state'
 import { IFavoriteArr } from 'types/favorite.d'
-import { IMovieAPIRes } from 'types/home.d'
+import { IMovieAPIRes, ISearchItem } from 'types/home.d'
 import { IFavModal } from 'types/modal.d'
 
-export const movieDataState = atom<IMovieAPIRes>({
+export const movieDataState = atom<ISearchItem[]>({
   key: '#movieDataState',
-  default: { Search: [], totalResults: 0, Response: 'False' },
+  default: [],
 })
 
 export const favoriteDataState = atom<IFavoriteArr>({

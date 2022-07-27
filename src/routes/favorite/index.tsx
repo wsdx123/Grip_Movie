@@ -14,7 +14,9 @@ const Favorite = () => {
     setIFavData(store.get('favorite'))
   })
 
-  if (!ifavData) return <div>즐겨찾기를 추가해주세요.</div>
+  console.log(ifavData)
+
+  if (ifavData.length === 0) return <div>즐겨찾기를 추가해주세요.</div>
 
   return (
     <div className={styles.container}>

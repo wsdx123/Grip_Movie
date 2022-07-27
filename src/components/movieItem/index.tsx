@@ -15,19 +15,21 @@ interface Props {
 }
 
 const MovieItem = (props: Props) => {
-  const [, setFavModal] = useRecoil(modalState)
-  const [, setModalY] = useRecoil(modalYState)
-  const [, setModalX] = useRecoil(modalXState)
-  const [selectedFavorite] = useState(false)
+  // const [, setFavModal] = useRecoil(modalState)
+  // const [, setModalY] = useRecoil(modalYState)
+  // const [, setModalX] = useRecoil(modalXState)
+  const [selectedFavorite, setSelectedFavorite] = useState(false)
   const { poster, title, year, type, imdbID }: Props = props
 
-  const handleModal = (e: MouseEvent<HTMLButtonElement>) => {
-    setFavModal({
-      visible: true,
-      data: props,
-    })
-    setModalY(e.clientY)
-    setModalX(e.clientX)
+  const handleModal = () => {
+    // setFavModal({
+    //   visible: true,
+    //   data: props,
+    // })
+    // setModalY(e.clientY)
+    // setModalX(e.clientX)
+
+    setSelectedFavorite((prev) => !prev)
   }
   // eslint-disable-next-line no-console
   // console.log(imdbID)
@@ -45,9 +47,9 @@ const MovieItem = (props: Props) => {
         </div>
       </div>
       <button type='button' onClick={handleModal}>
-        <InfoIcon />
+        {/* <InfoIcon /> */}
+        <HeartIcon className={cx(styles.heartIcon, { [styles.selectFavorite]: selectedFavorite })} />
       </button>
-      <HeartIcon className={cx(styles.heartIcon, { [styles.selectFavorite]: selectedFavorite })} />
     </li>
   )
 }

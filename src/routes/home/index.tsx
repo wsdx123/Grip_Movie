@@ -62,16 +62,7 @@ const Home = () => {
         {mData.length !== 0 && (
           <ul className={styles.movielist}>
             {mData.map((el) => {
-              return (
-                <MovieItem
-                  key={el.imdbID}
-                  poster={el.Poster}
-                  title={el.Title}
-                  year={el.Year}
-                  type={el.Type}
-                  imdbID={el.imdbID}
-                />
-              )
+              return <MovieItem key={el.imdbID} Item={el} />
             })}
             <div ref={ref}>
               <Loading />

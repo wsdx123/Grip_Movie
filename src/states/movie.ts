@@ -1,5 +1,4 @@
-import { IFavoriteArr } from 'types/favorite.d'
-import { ISearchItem } from 'types/home.d'
+import { ISearchItem, IFavoriteArr } from 'types/home.d'
 import { atom } from 'hooks/state'
 
 export const movieDataState = atom<ISearchItem[]>({

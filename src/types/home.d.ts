@@ -9,3 +9,5 @@ export interface ISearchItem {
 export interface IMovieAPIRes {
   Search: ISearchItem[]
 }
+
+export interface IFavoriteArr extends Array<ISearchItem> {}

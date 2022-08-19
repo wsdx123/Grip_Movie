@@ -3,7 +3,7 @@
 
 ## 배포 
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/b2ea978d-2449-4e18-b56d-d618d77e04ce/deploy-status)](https://app.netlify.com/sites/grip-movie-jy/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b2ea978d-2449-4e18-b56d-d618d77e04ce/deploy-status)](https://grip-movie-jy.netlify.app/)
 
 ## 진행 과정
 

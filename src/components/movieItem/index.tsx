@@ -1,10 +1,13 @@
-import { MouseEvent, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useMount } from 'react-use'
+import { cx } from 'styles'
+import store from 'store'
+
+import { favoriteDataState } from 'states/movie'
 import { useRecoil } from 'hooks/state'
 
-import { modalState, modalXState, modalYState } from 'states/movie'
-import { HeartIcon, InfoIcon } from 'assets/svgs'
 import styles from './movieItem.module.scss'
-import { cx } from 'styles'
+import { HeartIcon } from 'assets/svgs'
 
 interface Props {
   poster: string
@@ -15,24 +18,30 @@ interface Props {
 }
 
 const MovieItem = (props: Props) => {
-  // const [, setFavModal] = useRecoil(modalState)
-  // const [, setModalY] = useRecoil(modalYState)
-  // const [, setModalX] = useRecoil(modalXState)
+  const [favData, setFavData] = useRecoil(favoriteDataState)
+
   const [selectedFavorite, setSelectedFavorite] = useState(false)
   const { poster, title, year, type, imdbID }: Props = props
+  const temp1 = favData.filter((item) => item.imdbID === imdbID)
 
   const handleModal = () => {
-    // setFavModal({
-    //   visible: true,
-    //   data: props,
-    // })
-    // setModalY(e.clientY)
-    // setModalX(e.clientX)
-
-    setSelectedFavorite((prev) => !prev)
+    if (selectedFavorite) {
+      setFavData((prev) => prev.filter((v) => v.imdbID !== imdbID))
+      setSelectedFavorite((prev) => !prev)
+    } else {
+      setFavData((prev) => [...prev, props])
+      setSelectedFavorite((prev) => !prev)
+    }
   }
-  // eslint-disable-next-line no-console
-  // console.log(imdbID)
+
+  useMount(() => {
+    if (temp1.length === 0) return
+    setSelectedFavorite(true)
+  })
+
+  useEffect(() => {
+    store.set('favorite', favData)
+  }, [favData])
 
   return (
     <li className={styles.container}>
@@ -47,7 +56,6 @@ const MovieItem = (props: Props) => {
         </div>
       </div>
       <button type='button' onClick={handleModal}>
-        {/* <InfoIcon /> */}
         <HeartIcon className={cx(styles.heartIcon, { [styles.selectFavorite]: selectedFavorite })} />
       </button>
     </li>

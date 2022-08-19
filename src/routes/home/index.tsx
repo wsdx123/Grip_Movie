@@ -8,15 +8,14 @@ import { getMovieWhatISearchApi } from 'services/gripMovie'
 import { SearchIcon } from 'assets/svgs'
 
 import MovieItem from 'components/movieItem'
-import FavModal from 'components/modal'
 import NoSearch from './NoSearch'
 import Loading from './Loading'
 import styles from './home.module.scss'
 
 const Home = () => {
   const [inputChange, setInputChange] = useState('')
-  const [mData, setMData] = useRecoil(movieDataState)
   const [apiInput, setApiInput] = useRecoil(apiInputState)
+  const [mData, setMData] = useRecoil(movieDataState)
   const [pages, setPages] = useRecoil(pageState)
   const [ref, inView] = useInView()
 
@@ -79,7 +78,6 @@ const Home = () => {
             </div>
           </ul>
         )}
-        <FavModal />
       </div>
     </div>
   )

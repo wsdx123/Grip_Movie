@@ -8,6 +8,4 @@ export interface ISearchItem {
 
 export interface IMovieAPIRes {
   Search: ISearchItem[]
-  // totalResults: number
-  // Response: 'True' | 'False'
 }

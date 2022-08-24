@@ -5,15 +5,16 @@
 
   .navbar {
     display: flex;
-    background-color: colors.$BLUE;
-    width: 100%;
     justify-content: center;
+    width: 100%;
+    background-color: colors.$BLUE;
     border-radius: 5px;
 
     li {
       flex-grow: 1;
-      text-align: center;
       padding: 10px 0;
+      text-align: center;
+
       a {
         color: colors.$BLACK;
       }

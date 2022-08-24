@@ -50,7 +50,7 @@ const MovieItem = ({ Item, innerProvided }: Props) => {
     >
       <div className={styles.item}>
         <img src={Item.Poster} alt={Item.Title} />
-        <div className={styles.infor}>
+        <div className={styles.movieInformation}>
           <div>
             <h1>{Item.Title}</h1>
             <span>{Item.Year}</span>

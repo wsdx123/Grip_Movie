@@ -18,7 +18,7 @@
       margin-right: 10px;
     }
 
-    .infor {
+    .movieInformation {
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
@@ -34,10 +34,10 @@
     width: 20px;
     height: 19px;
     fill: colors.$GRAYE;
-    stroke: black;
+    stroke: colors.$BLACK;
   }
 
   .selectFavorite {
-    fill: red;
+    fill: colors.$RED;
   }
 }

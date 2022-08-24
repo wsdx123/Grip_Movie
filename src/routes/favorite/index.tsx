@@ -34,6 +34,7 @@ const Favorite = () => {
 
     setIFavData(items)
     store.set('favorite', items)
+    setFavData(store.get('favorite'))
   }
 
   return (
